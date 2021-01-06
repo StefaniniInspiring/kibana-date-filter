@@ -45,8 +45,7 @@
         },
         onSelect: function (date1, date2) {
           picker.hide()
-          console.log(changePeriod(date1, toDayEnd(date2)))
-          console.log(date1, toDayEnd(date2))
+          changePeriod(date1, toDayEnd(date2))
         },
       })
     })
@@ -60,9 +59,7 @@
   }
 
   function toDayEnd(date) {
-    date.setHours(23)
-    date.setMinutes(59)
-    date.setSeconds(59)
+    date.setHours(23,59,59,999);
     return date
   }
 
@@ -99,7 +96,7 @@
       iniDate,
     ).toISOString()}',mode:absolute,to:'${moment(endDate).toISOString()}'))`
 
-    src = src.replace(/time:\(.*\)/, newString)
+    src = encodeURI(src.replace(/time:\(.*?\)\)/g, newString))
 
     return src
   }
@@ -109,7 +106,6 @@
   src = findUrlParam('url')
   defaultSrc = src
 
-  console.log(moment().toISOString())
 </script>
 
 <style>
