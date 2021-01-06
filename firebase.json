@@ -1,6 +1,5 @@
 {
   "hosting": {
-    "site": "kibana-filter-febrafar",
     "public": "public",
     "ignore": [
       "firebase.json",
