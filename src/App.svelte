@@ -26,7 +26,7 @@
         moveByOneMonth: true,
         moduleRanges: {
           position: 'left',
-          ranges: { Hoje: [toDayBeginig(new Date()), toDayEnd(new Date())] },
+          ranges: { Hoje: [toDayBeginnig(new Date()), toDayEnd(new Date())] },
         },
         mobileFriendly: true,
         autoApply: true,
@@ -34,6 +34,14 @@
         buttonText: {
           apply: 'OK',
           cancel: 'Cancelar',
+          reset: `<span style="display: flex;">Limpar</span> <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+        <path d="M0 0h24v24H0z" fill="none"></path>
+        <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"></path>
+      </svg>`,
+        },
+        resetBtnCallback: function () {
+          src = defaultSrc
+          picker.hide()
         },
         onSelect: function (date1, date2) {
           picker.hide()
@@ -44,7 +52,7 @@
     })
   })
 
-  function toDayBeginig(date) {
+  function toDayBeginnig(date) {
     date.setHours(0)
     date.setMinutes(0)
     date.setSeconds(0)
@@ -99,7 +107,7 @@
   hideFilters()
 
   src = findUrlParam('url')
-  defaultSrc = src;
+  defaultSrc = src
 
   console.log(moment().toISOString())
 </script>
@@ -129,4 +137,3 @@
   </div>
   <iframe title="none" {src} />
 {:else}Ops, url do dashboard não encontrada{/if}
-
