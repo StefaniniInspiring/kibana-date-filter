@@ -96,8 +96,8 @@
       iniDate,
     ).toISOString()}',mode:absolute,to:'${moment(endDate).toISOString()}'))`
 
-    src = encodeURI(src.replace(/time:\(.*?\)\)/g, newString))
-
+    src = src.replace(/time:\(.*?\)\)/g, newString)
+    
     return src
   }
 
