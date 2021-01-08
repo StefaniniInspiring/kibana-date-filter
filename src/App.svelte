@@ -96,14 +96,14 @@
       iniDate,
     ).toISOString()}',mode:absolute,to:'${moment(endDate).toISOString()}'))`
 
-    src = src.replace(/time:\(.*?\)\)/g, newString)
-    
+    src = src.replace(/time(:|%3A)\(.*?\)\)/g, newString)
     return src
   }
 
   hideFilters()
 
-  src = findUrlParam('url')
+  src = decodeURI(findUrlParam('url'))
+  console.log(src)
   defaultSrc = src
 
 </script>
