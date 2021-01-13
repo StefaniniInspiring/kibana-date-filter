@@ -154,7 +154,7 @@
   }
 
   .heightfilter {
-    height: calc(100% - 34px) !important;
+    height: calc(100% - 46px) !important;
   }
 
   /* .height-no-filter {
@@ -166,12 +166,13 @@
     align-items: center;
     background-color: white;
     border: solid 1px #d9d9d9;
-    border-radius: 2px;
-    margin: 5px;
+    border-radius: 4px;
+    margin: 0px 22px 4px 8px;
     padding: 5px;
     padding-left: 10px;
     font-size: 14px;
     color: #585656;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1);
   }
 
   span {
