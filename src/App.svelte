@@ -154,12 +154,8 @@
   }
 
   .heightfilter {
-    height: calc(100% - 46px) !important;
+    height: calc(100% - 48px) !important;
   }
-
-  /* .height-no-filter {
-    height: 100vh;
-  } */
 
   div {
     display: flex;
@@ -185,6 +181,8 @@
     width: 200px;
     text-align: center;
     cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid silver;
   }
 </style>
 

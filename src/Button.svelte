@@ -44,8 +44,8 @@
     -moz-appearance: none;
     appearance: none;
     cursor: pointer;
-    height: 30px;
-    line-height: 30px;
+    height: 28px;
+    line-height: 28px;
     text-decoration: none;
     border: solid 1px transparent;
     text-align: center;
