@@ -1,4 +1,5 @@
 <script>
+  import Button from './Button.svelte'
   import { onMount } from 'svelte'
   import Litepicker from 'litepicker'
   import 'litepicker-module-ranges'
@@ -8,10 +9,12 @@
   let picker
   let src
   let defaultSrc
+  let showPicker = false
+  let inputValue
 
   onMount(async () => {
     document.addEventListener('DOMContentLoaded', function () {
-      if (src != null) {
+      if (src != null && (showPicker == 'true' || showPicker == true)) {
         picker = new Litepicker({
           element: document.getElementById('litepicker'),
           singleMode: false,
@@ -27,7 +30,29 @@
           moveByOneMonth: true,
           moduleRanges: {
             position: 'left',
-            ranges: { Hoje: [toDayBeginnig(new Date()), toDayEnd(new Date())] },
+            ranges: {
+              Hoje: [toDayBeginnig(new Date()), toDayEnd(new Date())],
+              '7 dias': [
+                toDayBeginnig(subDays(new Date(), 7)),
+                toDayEnd(new Date()),
+              ],
+              '15 dias': [
+                toDayBeginnig(subDays(new Date(), 15)),
+                toDayEnd(new Date()),
+              ],
+              '30 dias': [
+                toDayBeginnig(subDays(new Date(), 30)),
+                toDayEnd(new Date()),
+              ],
+              '60 dias': [
+                toDayBeginnig(subDays(new Date(), 60)),
+                toDayEnd(new Date()),
+              ],
+              '90 dias': [
+                toDayBeginnig(subDays(new Date(), 90)),
+                toDayEnd(new Date()),
+              ],
+            },
           },
           mobileFriendly: true,
           autoApply: true,
@@ -102,9 +127,21 @@
     return src
   }
 
+  function subDays(dateObj, numDays) {
+    dateObj.setDate(dateObj.getDate() - numDays)
+    return dateObj
+  }
+
+  function resetFilter() {
+    src = defaultSrc
+    picker.hide()
+    inputValue = '';
+  }
+
   hideFilters()
 
   src = findUrlParam('url')
+  showPicker = findUrlParam('picker') ?? 'false'
 
   defaultSrc = src
 </script>
@@ -112,25 +149,51 @@
 <style>
   iframe {
     width: 100%;
-    height: calc(100% - 34px);
     border: none;
+    height: 100vh;
   }
+
+  .heightfilter {
+    height: calc(100% - 34px) !important;
+  }
+
+  /* .height-no-filter {
+    height: 100vh;
+  } */
 
   div {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: solid 1px #d9d9d9;
+    border-radius: 2px;
+    margin: 5px;
+    padding: 5px;
+    padding-left: 10px;
+    font-size: 14px;
+    color: #585656;
+  }
+
+  span {
+    margin-right: 1em;
+    color: #7b8a8b;
   }
 
   input {
     height: 24px;
     width: 200px;
     text-align: center;
+    cursor: pointer;
   }
 </style>
 
 {#if src}
-  <div>
-    <input type="text" id="litepicker" placeholder="Alterar intervalo" />
-  </div>
-  <iframe title="none" {src} />
+  {#if showPicker == 'true' || showPicker == true}
+    <div>
+      <span>Filtro data:</span>
+      <input bind:value={inputValue} type="text" id="litepicker" placeholder="Alterar intervalo" />
+      <Button on:click={resetFilter} />
+    </div>
+  {/if}
+  <iframe class:heightfilter={showPicker === 'true'} title="none" {src} />
 {:else}Ops, url do dashboard não encontrada{/if}
