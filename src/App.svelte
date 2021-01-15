@@ -135,7 +135,8 @@
   function resetFilter() {
     src = defaultSrc
     picker.hide()
-    inputValue = '';
+    inputValue = ''
+    picker.clearSelection()
   }
 
   hideFilters()
@@ -190,7 +191,11 @@
   {#if showPicker == 'true' || showPicker == true}
     <div>
       <span>Filtro data:</span>
-      <input bind:value={inputValue} type="text" id="litepicker" placeholder="Alterar intervalo" />
+      <input
+        bind:value={inputValue}
+        type="text"
+        id="litepicker"
+        placeholder="Alterar intervalo" />
       <Button on:click={resetFilter} />
     </div>
   {/if}
