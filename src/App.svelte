@@ -29,7 +29,7 @@
           useResetBtn: true,
           moveByOneMonth: true,
           moduleRanges: {
-            position: 'left',
+            position: window.innerWidth >= 768 ? 'left' : 'bottom',
             ranges: {
               Hoje: [toDayBeginnig(new Date()), toDayEnd(new Date())],
               '7 dias': [
@@ -158,7 +158,7 @@
     height: calc(100% - 48px) !important;
   }
 
-  div {
+  .container {
     display: flex;
     align-items: center;
     background-color: white;
@@ -172,30 +172,55 @@
     box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1);
   }
 
-  span {
+  .filter-label {
     margin-right: 1em;
     color: #7b8a8b;
   }
 
+  .date-icon {
+    position: relative;
+  }
+  .date-icon svg {
+      position: absolute;
+      top: 5px;
+      left: 9px;
+      width: 18px;
+      height: 18px;
+      z-index: 999;
+  }
+
+  @media screen and (max-width: 767px) {
+    .filter-label {
+      display: none;
+    }
+    
+  }
+
   input {
     height: 24px;
-    width: 200px;
+    width: 190px;
     text-align: center;
     cursor: pointer;
     border-radius: 4px;
     border: 1px solid silver;
+    padding-left: 12px;
   }
 </style>
 
 {#if src}
-  {#if showPicker == 'true' || showPicker == true}
-    <div>
-      <span>Filtro data:</span>
-      <input
-        bind:value={inputValue}
-        type="text"
-        id="litepicker"
-        placeholder="Alterar intervalo" />
+  {#if showPicker === 'true' || showPicker === true}
+    <div class="container">
+      <span class="filter-label">Filtro data:</span>
+      <div class="date-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          <input
+          bind:value={inputValue}
+          type="text"
+          id="litepicker"
+          placeholder="Alterar intervalo" />
+      </div>
       <Button on:click={resetFilter} />
     </div>
   {/if}
